@@ -8,7 +8,7 @@ stages {
     stage('Docker compose build') {
         steps {
             echo '----------------- This is a docker-compose phase ----------'
-            sh 'docker-compose.yaml up'
+            sh 'sudo apt-get update docker-compose'
         }
     }
   }
