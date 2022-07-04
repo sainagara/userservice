@@ -1,0 +1,92 @@
+version: '3.7'
+
+services:
+
+  ecommerce-user-registration :
+    image: sainagaraju12345/ecom-user-module-micro:0.0.1.RELEASE
+    mem_limit: 700m
+    ports:
+      - "9001:9001"
+    networks:
+      - ecommerce-network
+    depends_on:
+      - naming-server
+      - mysql-server
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+    
+    
+     
+
+  ecommerce-user-login-module:
+    image: sainagaraju12345/ecom-user-login-micro:0.0.1.RELEASE
+    mem_limit: 700m
+    ports:
+      - "9000:9000"
+    networks:
+      - ecommerce-network
+    depends_on:
+      - naming-server
+      - mysql-server
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      
+  ecommerce-products-module:
+    image: sainagaraju12345/ecom-products-micro:0.0.1.RELEASE
+    mem_limit: 700m
+    ports:
+      - "9002:9002"
+    networks:
+      - ecommerce-network
+    depends_on:
+      - naming-server
+      - mysql-server
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+    
+      
+
+  api-gateway:
+    image: sainagaraju12345/ecom-gateway-micro:0.0.1.RELEASE
+    mem_limit: 700m
+    ports:
+      - "8765:8765"
+    networks:
+      - ecommerce-network
+    depends_on:
+      - naming-server    
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+     
+      
+
+  naming-server:
+    image: sainagaraju12345/ecom-naming-server-micro:0.0.1.RELEASE
+    mem_limit: 700m
+    ports:
+      - "8761:8761"
+    networks:
+      - ecommerce-network
+      
+  mysql-server:
+    image: mysql:8
+    container_name: productsdb
+    environment:
+    - MYSQL_ROOT_PASSWORD=root
+    - MYSQL_DATABASE= bootdb
+#    - MYSQL_USER=root
+    - MYSQL_PASSWORD=root
+    restart: always
+#    ports: 
+#    - 3306:3306
+    networks:
+      - ecommerce-network
+    
+
+
+   
+
+
+
+networks:
+  ecommerce-network:
