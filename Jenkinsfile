@@ -9,7 +9,7 @@ stages {
         steps {
             echo '----------------- This is a docker-compose phase ----------'
             sh 'docker-compose --version'
-            sh 'sudo su $USER'
+            sh 'su $USER'
             sh 'docker-compose up'
         }
     }
