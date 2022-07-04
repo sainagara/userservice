@@ -8,7 +8,7 @@ stages {
     stage('Docker compose build') {
         steps {
             echo '----------------- This is a docker-compose phase ----------'
-            sh 'sudo docker-compose up'
+            sh 'docker-compose up -d --force-recreate --remove-orphans --build'
         }
     }
   }
