@@ -11,7 +11,7 @@ services:
       - ecommerce-network
     depends_on:
       - naming-server
-      - mysql-server
+#      - mysql-server
     environment:
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
     
@@ -27,7 +27,7 @@ services:
       - ecommerce-network
     depends_on:
       - naming-server
-      - mysql-server
+#      - mysql-server
     environment:
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
       
@@ -40,7 +40,7 @@ services:
       - ecommerce-network
     depends_on:
       - naming-server
-      - mysql-server
+#      - mysql-server
     environment:
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
     
@@ -68,19 +68,19 @@ services:
     networks:
       - ecommerce-network
       
-  mysql-server:
-    image: mysql:8.0.29
-    container_name: productsdb
-    environment:
-    - MYSQL_ROOT_PASSWORD=root
-    - MYSQL_DATABASE= bootdb
+#  mysql-server:
+#    image: mysql:8.0.29
+#    container_name: productsdb
+#    environment:
+#    - MYSQL_ROOT_PASSWORD=root
+#    - MYSQL_DATABASE= bootdb
 #    - MYSQL_USER=root
-    - MYSQL_PASSWORD=root
-    restart: always
+#    - MYSQL_PASSWORD=root
+ #   restart: always
 #    ports: 
 #    - 3306:3306
-    networks:
-      - ecommerce-network
+#   networks:
+#    - ecommerce-network
     
 
 
